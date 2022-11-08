@@ -1,3 +1,4 @@
+import React from "react";
 import config from "../config.json";
 import styled from "styled-components";
 import { CSSReset } from "../src/components/CssReset";
@@ -11,13 +12,14 @@ export default function HomePage() {
     flexDirection: "column",
     flex: 1,
   };
+  const [searchFilter,setSearchFilter] = React.useState("");
   return (
     <>
       <CSSReset />
       <div style={estilosDaHomePage}>
-        <Menu />
+        <Menu searchFilter={searchFilter} setSearchFilter={setSearchFilter}/>
         <Header />
-        <Timeline playlists={config.playlists} />
+        <Timeline searchFilter={searchFilter} playlists={config.playlists} />
         <Favorites favorites={config.favorites} />
       </div>
     </>
@@ -41,7 +43,7 @@ const StyledHeader = styled.div`
 
 const StyledBanner = styled.div`
   .banner {
-    height: 300px;
+    height: 230px;
     width: 100%;
     background-image: url("background.jpg");
     background-repeat: repeat;
@@ -70,19 +72,21 @@ function Header() {
   );
 }
 
-function Timeline(props) {
+function Timeline({searchFilter, ...props}) {
   const playlistNames = Object.keys(props.playlists);
   return (
     <StyledTimeline>
       {playlistNames.map((playlistName) => {
         const videos = props.playlists[playlistName];
         return (
-          <section>
+          <section key={playlistName}>
             <h2>{playlistName}</h2>
             <div>
-              {videos.map((video) => {
+              {videos.filter((video)=>{
+                return video.title.toLowerCase().includes(searchFilter.toLowerCase())
+              }).map((video) => {
                 return (
-                  <a href={video.url}>
+                  <a href={video.url} key={video.url}>
                     <img src={video.thumb} />
                     <spam>{video.title}</spam>
                   </a>
