@@ -2,6 +2,7 @@
   "name": "André Gomes",
   "job": "Fullstack Developer",
   "github": "andgomes95",
+  "banner":"https://static.vecteezy.com/system/resources/previews/002/099/721/original/mountain-beautiful-landscape-background-design-illustration-free-vector.jpg",
   "playlists": {
       "jogos": [
           {
@@ -129,5 +130,16 @@
               "thumb": "https://img.youtube.com/vi/0JWMVc1CqpA/hqdefault.jpg"
           }
       ]
-  }
+  },
+  "favorites":[
+    {
+        "github":"gfpig",
+        "aluratube":"https://aluratube-blush-sigma.vercel.app/"
+    },
+    {
+        "github":"Tonzera10",
+        "aluratube":"projeto-alura-tube.vercel.app/"
+    }
+
+  ]
 }

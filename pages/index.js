@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CSSReset } from "../src/components/CssReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
+import { StyledFavorite } from "../src/components/Favorites";
 
 export default function HomePage() {
   const estilosDaHomePage = {
@@ -17,6 +18,7 @@ export default function HomePage() {
         <Menu />
         <Header />
         <Timeline playlists={config.playlists} />
+        <Favorites favorites={config.favorites} />
       </div>
     </>
   );
@@ -29,7 +31,6 @@ const StyledHeader = styled.div`
     border-radius: 50%;
   }
   .user-info {
-    margin-top: 50px;
     display: flex;
     align-items: center;
     width: 100%;
@@ -38,18 +39,34 @@ const StyledHeader = styled.div`
   }
 `;
 
+const StyledBanner = styled.div`
+  .banner {
+    height: 300px;
+    width: 100%;
+    background-image: url("background.jpg");
+    background-repeat: repeat;
+    background-attachment: scroll;
+    
+  }
+`;
+
 function Header() {
   return (
-    <StyledHeader>
-      {/*<img src='banner' />*/}
-      <section className="user-info">
-        <img src={`https://github.com/${config.github}.png`} />
-        <div>
-          <h2>{config.name}</h2>
-          <p>{config.job}</p>
-        </div>
-      </section>
-    </StyledHeader>
+    <>
+      <StyledBanner>
+        <div className="banner"></div>
+      </StyledBanner>
+      <StyledHeader>
+        
+        <section className="user-info">
+          <img src={`https://github.com/${config.github}.png`} />
+          <div>
+            <h2>{config.name}</h2>
+            <p>{config.job}</p>
+          </div>
+        </section>
+      </StyledHeader>
+    </>
   );
 }
 
@@ -76,5 +93,28 @@ function Timeline(props) {
         );
       })}
     </StyledTimeline>
+  );
+}
+
+function Favorites(props){
+  const favorites = props.favorites;
+  const favoriteTitle = "Favorites";
+  return (
+    <StyledFavorite>
+      <section>
+      <h2>{favoriteTitle}</h2>
+        <div>
+          {favorites.map((favorite)=>{
+            return (
+              <a href={favorite.aluratube}>
+                <img src={`https://github.com/${favorite.github}.png`} />
+                <spam>{favorite.github}</spam>
+              </a>
+            );
+          })}
+
+        </div>
+      </section>
+    </StyledFavorite>
   );
 }
