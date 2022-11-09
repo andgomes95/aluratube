@@ -1,7 +1,6 @@
 import React from "react";
 import config from "../config.json";
 import styled from "styled-components";
-import { CSSReset } from "../src/components/CssReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
 import { StyledFavorite } from "../src/components/Favorites";
@@ -15,7 +14,6 @@ export default function HomePage() {
   const [searchFilter,setSearchFilter] = React.useState("");
   return (
     <>
-      <CSSReset />
       <div style={estilosDaHomePage}>
         <Menu searchFilter={searchFilter} setSearchFilter={setSearchFilter}/>
         <Header />
@@ -27,6 +25,7 @@ export default function HomePage() {
 }
 
 const StyledHeader = styled.div`
+  background-color: ${({theme})=>theme.backgroundLevel1};
   img {
     width: 80px;
     height: 80px;

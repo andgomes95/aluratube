@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DarkModeSwitch from "./components/DarkModeSwitch";
 import Search from "./components/Search";
 
 const StyledMenu = styled.header`
@@ -6,8 +7,8 @@ const StyledMenu = styled.header`
   flex-direction: row;
   height: 56px;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.backgroundLevel1 || "#FFFFFF"};
-  border: 1px solid ${({ theme }) => theme.borderBase || "#e5e5e5"};
+  background-color: ${({ theme }) => theme.backgroundLevel1};
+  border: 1px solid ${({ theme }) => theme.borderBase};
   align-items: center;
   padding: 0 16px;
   gap: 16px;
@@ -32,6 +33,7 @@ export default function Menu({searchFilter,setSearchFilter}) {
         <Logo />
       </div>
       <Search searchFilter={searchFilter} setSearchFilter={setSearchFilter} />
+      <DarkModeSwitch />
     </StyledMenu>
   );
 }
