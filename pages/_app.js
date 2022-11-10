@@ -2,13 +2,14 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { CSSReset } from "../src/components/CssReset";
 import ColorModeProvider, { ColorModeContext } from "../src/components/Menu/components/ColorMode";
+import RegisterVideo from "../src/components/RegisterVideo";
 const theme = {
   light: {
       backgroundBase: "#f9f9f9",
       backgroundLevel1: "#ffffff",
       backgroundLevel2: "#f0f0f0",
       borderBase: "#e5e5e5",
-      textColorBase: "#1B998B",
+      textColorBase: "#202020",
   },
   dark: {
       backgroundBase: "#181818",
@@ -33,6 +34,7 @@ function MyApp({Component, pageProps}){
     <ThemeProvider theme={theme[contexto.mode]}>
       <CSSReset />
       <Component {...pageProps} />
+      <RegisterVideo />
     </ThemeProvider>
   )
 }

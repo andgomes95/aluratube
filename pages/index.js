@@ -87,7 +87,7 @@ function Timeline({searchFilter, ...props}) {
                 return (
                   <a href={video.url} key={video.url}>
                     <img src={video.thumb} />
-                    <spam>{video.title}</spam>
+                    <span>{video.title}</span>
                   </a>
                 );
               })}
