@@ -4,20 +4,39 @@ import styled from "styled-components";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
 import { StyledFavorite } from "../src/components/Favorites";
+import {videoService} from "../src/services/videoService.js"
+
 
 export default function HomePage() {
+  const service = videoService();
+  const [searchFilter,setSearchFilter] = React.useState("");
+  const [playlists,setPlaylists] = React.useState({});
+
+  React.useEffect(()=>{
+    service.getAllVideos().then((dados)=>{
+      const novasPlaylists ={...playlists};
+      dados.data.forEach((video)=>{
+        if(!novasPlaylists[video.playlist]){
+          novasPlaylists[video.playlist] = [];  
+        }
+        novasPlaylists[video.playlist].push(video);
+      })
+     setPlaylists(novasPlaylists);
+    })
+  },[]);
+
   const estilosDaHomePage = {
     display: "flex",
     flexDirection: "column",
     flex: 1,
   };
-  const [searchFilter,setSearchFilter] = React.useState("");
+ 
   return (
     <>
       <div style={estilosDaHomePage}>
         <Menu searchFilter={searchFilter} setSearchFilter={setSearchFilter}/>
         <Header />
-        <Timeline searchFilter={searchFilter} playlists={config.playlists} />
+        <Timeline searchFilter={searchFilter} playlists={playlists} />
         <Favorites favorites={config.favorites} />
       </div>
     </>
@@ -109,7 +128,7 @@ function Favorites(props){
         <div>
           {favorites.map((favorite)=>{
             return (
-              <a href={favorite.aluratube}>
+              <a href={favorite.aluratube} key={favorite.aluratube}>
                 <img src={`https://github.com/${favorite.github}.png`} />
                 <spam>{favorite.github}</spam>
               </a>
@@ -121,3 +140,5 @@ function Favorites(props){
     </StyledFavorite>
   );
 }
+
+
